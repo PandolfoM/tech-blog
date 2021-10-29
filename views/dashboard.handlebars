@@ -1,14 +1,12 @@
 {{#if posts.length}}
   <section>
-    <h2>Your Posts</h2>
-    <ul>
+    <li class="my-posts">
       {{#each posts}}
       <a href="/dashboard/edit/{{id}}">{{title}} <span>{{format_date created_at}}</span></a>
-      <br>
       {{/each}}
-    </ul>
+    </li>
 {{/if}}
     <div>
-      <a href="/dashboard/new-post">+ New Post</a>
+      <a href="/dashboard/new-post" class="btn new-post-btn">+ New Post</a>
     </div>
   </section>
