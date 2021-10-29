@@ -18,6 +18,12 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
+    include: [
+      {
+        model: Post,
+        attributes: ["id", "title", "description", "created_at"],
+      },
+    ],
   })
     .then((dbUserData) => {
       if (!dbUserData) {
@@ -39,9 +45,10 @@ router.post("/", (req, res) => {
   })
     .then((dbUserData) => {
       req.session.save(() => {
-        req.session.user_id = dbUserData.isSoftDeleted;
+        req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
+        req.session.onDashboard = false;
 
         res.json(dbUserData);
       });
@@ -52,21 +59,21 @@ router.post("/", (req, res) => {
     });
 });
 
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
   User.findOne({
     where: {
-      username: req.body.username
-    }
-  }).then(dbUserData => {
+      username: req.body.username,
+    },
+  }).then((dbUserData) => {
     if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that username' });
+      res.status(400).json({ message: "No user with that username" });
       return;
     }
 
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect password!' });
+      res.status(400).json({ message: "Incorrect password!" });
       return;
     }
 
@@ -74,57 +81,57 @@ router.post('/login', (req, res) => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
-  
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
+      req.session.loggedIn = false;
+
+      res.json({ user: dbUserData, message: "You are now logged in!" });
     });
   });
 });
 
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
     });
-  }
-  else {
+  } else {
     res.status(404).end();
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   User.update(req.body, {
     individualHooks: true,
     where: {
-      id: req.params.id
-    }
+      id: req.params.id,
+    },
   })
-    .then(dbUserData => {
+    .then((dbUserData) => {
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: "No user found with this id" });
         return;
       }
       res.json(dbUserData);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
   User.destroy({
     where: {
-      id: req.params.id
-    }
+      id: req.params.id,
+    },
   })
-    .then(dbUserData => {
+    .then((dbUserData) => {
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: "No user found with this id" });
         return;
       }
       res.json(dbUserData);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });

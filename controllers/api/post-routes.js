@@ -41,6 +41,7 @@ router.post('/', (req, res) => {
   Post.create({
     title: req.body.title,
     description: req.body.description,
+    user_id: req.session.user_id
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
