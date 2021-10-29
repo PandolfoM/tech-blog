@@ -25,6 +25,39 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get('/edit/:id', (req, res) => {
+  Post.findByPk(req.params.id, {
+    attributes: [
+      'id',
+      'title',
+      'description',
+      'created_at',
+    ],
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
+  })
+    .then(dbPostData => {
+      if (dbPostData) {
+        const post = dbPostData.get({ plain: true });
+        
+        res.render('edit-post', {
+          post,
+          loggedIn: true,
+          onDashboard: true
+        });
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+});
+
 router.get("/new-post", (req, res) => {
   res.render("new-post", { loggedIn: true, onDashboard: true });
 });
