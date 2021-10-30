@@ -1,4 +1,4 @@
-# tech-blog
+# Tech Blog
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)<br/>
 Tech blog is a blog where you can sign up and start posting anything you would like other people to see.
