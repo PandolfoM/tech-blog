@@ -113,7 +113,7 @@ textarea:focus, input:focus {
 }
 
 .post {
-  margin: 0 50px;
+  margin: 20px 50px;
 }
 
 .login-form, .signup-form {
@@ -167,4 +167,45 @@ textarea:focus, input:focus {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+}
+
+.comments, .comment-form {
+  margin: 20px 50px;
+}
+
+.comment {
+  padding: 20px;
+  border: 5px solid var(--main-color);
+}
+
+.comment-header {
+  margin-top: 8px;
+  padding-top: 40px;
+  background-color: var(--main-color);
+}
+
+.comment-text {
+  padding-bottom: 10px;
+}
+
+.create-comment {
+  padding: 20px;
+  border: 5px solid var(--main-color);
+}
+
+.create-comment h2{
+  font-size: 1em;
+  margin-bottom: 2px;
+}
+
+.comment-submit {
+  padding-top: 10px;
+}
+
+.comment-body {
+  width: 100%;
+}
+
+.comment-submit button {
+  width: 100%;
 }
