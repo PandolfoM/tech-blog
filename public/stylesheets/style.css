@@ -108,7 +108,8 @@ textarea:focus, input:focus {
 .post-list,
 .login-form,
 .signup-form,
-.edit-post-form {
+.edit-post-form,
+.new-post-form {
   padding: 0;
   margin: 20px auto;
 }
@@ -117,11 +118,11 @@ textarea:focus, input:focus {
   margin: 20px 50px;
 }
 
-.login-form, .signup-form, .edit-post-form {
+.login-form, .signup-form, .edit-post-form, .new-post-form {
   width: 90%;
 }
 
-.login-form h2, .signup-form h2, .edit-post-form h2 {
+.login-form h2, .signup-form h2, .edit-post-form h2, .new-post-form h2 {
   font-size: 1em;
   padding: 12px 12px 8px 12px;
   margin-bottom: 0;
@@ -133,12 +134,12 @@ textarea:focus, input:focus {
   width: 100%;
 }
 
-.login, .signup, .edit-post {
+.login, .signup, .edit-post, .new-post {
   border: 5px solid var(--main-color);
   padding: 10px;
 }
  
-.login input, .signup input, .edit-post input{
+.login input, .signup input, .edit-post input, .new-post input{
   margin-bottom: 10px;
   width: 100%;
 }
@@ -207,6 +208,6 @@ textarea:focus, input:focus {
   width: 100%;
 }
 
-.comment-submit button {
+.comment-submit button, .post-create-btn {
   width: 100%;
 }
